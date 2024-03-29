@@ -37,10 +37,14 @@ cd ts
 ```sh
 npm install
 ```
-
-5. Build and run the Docker containers
-``` sh
+5. Go back to the root of the project
+```sh
 cd ..
+```
+
+6. Build and run the Docker containers
+``` sh
+
 docker compose up --build
 ```
 
@@ -50,6 +54,7 @@ To customize the project you'll need to change some of the environment variables
 To set up database access and schema name, go into the docker-compose.yml and customise the value for these variables 
 ```yml
 nodets:
+    [...]
     environment: 
         DB_HOST: db
         DB_USER: <your_username>
@@ -57,6 +62,7 @@ nodets:
         DB_NAME: <schema_name>
 
 db:
+    [...]
     environment:
         MYSQL_ROOT_PASSWORD: <example_root_password>
         MYSQL_DATABASE: <schema_Name>
@@ -64,6 +70,7 @@ db:
         MYSQL_PASSWORD: <your_password>
 
 pma:
+    [...]
     environment:
         PMA_HOST: db
         MYQL_ROOT_PASSWORD: <example_root_password>
