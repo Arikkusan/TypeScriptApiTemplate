@@ -2,17 +2,18 @@ version: '3.8'
 
 services:
 
-  nodets:
-      build: # TODO: change ts to the name of the folder it's in
+  node_service:
+      container_name: node-service
+      build:
         context: .
-        dockerfile: ts/Dockerfile.nodets
+        dockerfile: Dockerfile
       restart: unless-stopped
       depends_on:
         - db
       ports:
-        - "3000:3000"
+        - "3000:3000" # change the port on the left to the port you want to use
       volumes:
-        - ./ts:/app
+        - ./:/app
       environment: # TODO: set the environement variable to the values you desire
         DB_HOST: db
         DB_USER: user
@@ -21,6 +22,7 @@ services:
         PORT: 3000
 
   db:
+    container_name: database-service
     image: mariadb:latest
     restart: unless-stopped
     environment: # TODO: set the environement variable to the values you desire
@@ -29,11 +31,12 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: password
     ports:
-      - "3306:3306"  # Forwarding MariaDB port for external access
+      - "3306:3306"  # Forwarding MariaDB port for EXTERNAL access
     volumes:
       - db_data:/var/lib/mysql  # Persist data
       
   pma:
+    container_name: phpmyadmin-service
     image: phpmyadmin/phpmyadmin
     restart: unless-stopped
     depends_on:
