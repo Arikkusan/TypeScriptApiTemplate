@@ -56,46 +56,19 @@ To set up database access and schema name, go into the docker-compose.yml and cu
 nodets:
     [...]
     environment: 
-        DB_HOST: db
+        DB_HOST: <container_name or ip address>
         DB_USER: <your_username>
         DB_PASSWORD: <your_password>
         DB_NAME: <schema_name>
 
-db:
-    [...]
-    environment:
-        MYSQL_ROOT_PASSWORD: <example_root_password>
-        MYSQL_DATABASE: <schema_Name>
-        MYSQL_USER: <your_username>
-        MYSQL_PASSWORD: <your_password>
-
-pma:
-    [...]
-    environment:
-        PMA_HOST: db
-        MYQL_ROOT_PASSWORD: <example_root_password>
-
 
 ```
-
-
-### Running the tests
-Explain how to run the automated tests for this system.
-
-### Deployment
-Add additional notes about how to deploy this on a live system.
 
 ### Built With
 - [Typescript](https://www.typescriptlang.org/) - The main language used.
 - [Docker](https://www.docker.com/) - Used for containerization.
 - [Docker Compose](https://docs.docker.com/compose/) - Used for container orchestration.
 - [MariaDB](https://mariadb.org) - The database used.
-
-<!-- ### Contributing
-Please read CONTRIBUTING.md for details on our code of conduct, and the process for submitting pull requests to us.
-
-### License
-This project is licensed under the MIT License - see the LICENSE.md file for details. -->
 
 ### Acknowledgments
 Hat tip to anyone whose code was used
