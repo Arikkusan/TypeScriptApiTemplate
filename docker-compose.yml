@@ -2,50 +2,22 @@ version: '3.8'
 
 services:
 
-  node_service:
-      container_name: node-service
+  [node_service]:
+      container_name: [node-service]
       build:
         context: .
         dockerfile: Dockerfile
       restart: unless-stopped
-      depends_on:
-        - db
       ports:
         - "3000:3000" # change the port on the left to the port you want to use
       volumes:
         - ./:/app
       environment: # TODO: set the environement variable to the values you desire
-        DB_HOST: db
-        DB_USER: user
-        DB_PASSWORD: password
-        DB_NAME: Schema_Name
+        DB_HOST: [hostname (traefik) or IP]
+        DB_USER: [user]
+        DB_PASSWORD: [password]
+        DB_NAME: [Schema_Name]
         PORT: 3000
-
-  db:
-    container_name: database-service
-    image: mariadb:latest
-    restart: unless-stopped
-    environment: # TODO: set the environement variable to the values you desire
-      MYSQL_ROOT_PASSWORD: example_root_password
-      MYSQL_DATABASE: Schema_Name
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
-    ports:
-      - "3306:3306"  # Forwarding MariaDB port for EXTERNAL access
-    volumes:
-      - db_data:/var/lib/mysql  # Persist data
-      
-  pma:
-    container_name: phpmyadmin-service
-    image: phpmyadmin/phpmyadmin
-    restart: unless-stopped
-    depends_on:
-      - db
-    ports:
-      - "8080:80"  # Forwarding phpMyAdmin port for external access
-    environment:
-      PMA_HOST: db  # Use the service name as the host
-      MYSQL_ROOT_PASSWORD: example_root_password  # TODO: change password accordingly to what you had set up above
 
 volumes:
   db_data:
